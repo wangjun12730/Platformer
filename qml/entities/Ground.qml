@@ -5,7 +5,7 @@ TiledEntityBase {
   id: ground
   entityType: "ground"
 
-  size: 2 // must be >= 2, because we got a sprite for the start, one for the end and a repeatable center sprite
+
 
 
   Row {
@@ -21,6 +21,8 @@ TiledEntityBase {
   BoxCollider {
     anchors.fill: parent
     bodyType: Body.Static
+    categories: Box.Category2
+    collidesWith: Box.Category1 | Box.Category3
     fixture.onBeginContact: {
       var otherEntity = other.getBody().target
       if(otherEntity.entityType === "player") player.contacts++

@@ -43,7 +43,11 @@ EntityBase {
     fixedRotation: true // we are running, not rolling...
     bullet: true // for super accurate collision detection, use this sparingly, because it's quite performance greedy
     sleepingAllowed: false
-    // apply the horizontal value of the TwoAxisController as force to move the player left and right
+    categories: Box.Category1
+//    1 plater  2 ground   3 platform  4 enemy   5  a entity below the ground  6  coins  7 plant 8 finish
+    //9 resetSensor
+    collidesWith: Box.Category2 | Box.Category3 | Box.Category4 | Box.Category5 |Box.Category6 |Box.Category8 |Box.Category9
+//    // apply the horizontal value of the TwoAxisController as force to move the player left and right
     force: Qt.point(controller.xAxis*20*32,0)
     // limit the horizontal velocity
     onLinearVelocityChanged: {

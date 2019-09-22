@@ -5,7 +5,7 @@ Item {
   width: gameScene.gridSize
   height: gameScene.gridSize
   property alias image: sprite.source
-  property string pos: "mid" // can be either "mid","left" or "right"
+  property alias sprite:sprite
 
   MultiResolutionImage {
     id: sprite

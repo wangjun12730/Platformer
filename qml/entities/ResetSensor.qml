@@ -16,6 +16,8 @@ EntityBase {
 
   BoxCollider {
     anchors.fill: parent
+    categories: Box.Category9
+    collidesWith: Box.Category1
     collisionTestingOnlyMode: true
     fixture.onBeginContact: {
       var otherEntity = other.getBody().target

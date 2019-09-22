@@ -27,7 +27,13 @@ GameWindow {
        name: "game"
        PropertyChanges {target: gameScene; opacity: 1}
        PropertyChanges {target: gameWindow; activeScene: gameScene}
-     }
+     },
+      State {
+        name:"score"
+        PropertyChanges {target: scoresranking;opacity:1}
+        PropertyChanges {target: gameWindow;activeScene:scoresranking}
+      }
+
    ]
 
   // the size of the Window can be changed at runtime by pressing Ctrl (or Cmd on Mac) + the number keys 1-8
@@ -39,13 +45,24 @@ GameWindow {
 
   MenuScene{
    id: menuScene
-   onSelectPressed: gameWindow.state = "menu"
-   onStartPressed:gameWindow.state = "game"
+   onSelectPressed: gameWindow.state = "score"
+   onStartPressed:{
+       gameScene.enabled=true
+       gameWindow.state = "game"
+   }
 
   }
 
   GameScene {
     id: gameScene
+    onBackMainMenu: {
+        gameWindow.state="menu"
+        enabled:false
+    }
+  }
+  Scoresranking{
+      id:scoresranking
+      onBackMainMenu: gameWindow.state="menu"
   }
 }
 

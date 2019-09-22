@@ -38,9 +38,22 @@ DISTFILES += \
     qml/commond/MenuButton.qml \
     qml/entities/Ground1.qml \
     qml/levels/Level2.qml \
-    qml/entities/Platform1.qml \
-    qml/entities/Ground2.qml \
     qml/entities/EnemyBase.qml \
     qml/entities/ObstacleBase.qml \
-    qml/entities/Coin.qml
+    qml/entities/Coin.qml \
+    qml/entities/EnemyPet.qml \
+    qml/entities/EnemyCrystallo.qml \
+    qml/scenes/Scoresranking.qml \
+    qml/entities/Finish.qml \
+    qml/entities/EnemyXiezi.qml \
+    qml/entities/EnemyDragon.qml \
+    qml/entities/EnemyMonster.qml \
+    qml/entities/EnemySnail.qml \
+    qml/entities/EnemyIceBlock.qml \
+    qml/entities/Diamond.qml \
+    qml/entities/Magic.qml \
+    qml/entities/EnemyFHead.qml \
+    qml/entities/EnemyPaopao.qml \
+    qml/entities/Bullet.qml \
+    qml/entities/Water.qml
 

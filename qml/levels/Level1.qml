@@ -18,31 +18,134 @@ Levels.LevelBase {
     column: 0
     size: 6
   }
+  Water{
+      row: 6
+      column: 0
+      size: 2
+  }
+
   Ground {
     row: 8
     column: 0
     size: 2
   }
+  Water{
+      row: 10
+      column: 0
+      size: 2
+  }
+
   Platform {
     row: 3
     column: 3
-    size: 4
+    size: 3
   }
-  ObstacleBase{
-      row:3
-      column:4
+//  ObstacleBase{
+//      row:3
+//      column:4
+//      size:1
+//  }
+
+  EnemyCrystallo{
+      row:7
+      column: 7
+      size:1
+      directionTimer.interval: 3000
+  }
+  EnemyCrystallo{
+      row:30
+      column: 4
       size:1
   }
 
+  EnemyPet{
+      row:4
+      column: 8
+      size:1
+  }
+
+  //金币
+    Repeater{
+        model: 6
+        Coin{
+            row: 17+index*1
+            column: 4
+            size: 1
+
+        }
+    }
   Platform {
     row: 7
     column: 6
     size: 4
   }
+  EnemyXiezi{
+      row:12
+      column: 4
+      size:1
+      directionTimer.interval: 1000
+  }
+  EnemyXiezi{
+      row:7
+      column: 2
+      size:1
+      directionTimer.interval:5000
+  }
+   EnemyDragon{
+       row:12
+       column: 2
+       size:1
+       directionTimer.interval: 5000
+   }
+   EnemyMonster{
+       row:20
+       column: 2
+       size:1
+       directionTimer.interval: 5000
+   }
+   EnemySnail{
+       row:30
+       column: 2
+       size:1
+       directionTimer.interval: 5000
+   }
+   EnemyIceBlock{
+       row:32
+       column: 2
+       size:1
+       directionTimer.interval: 5000
+   }
+   Diamond{
+       row:35
+       column: 1
+       size:1
+   }
+   Magic{
+       row:38
+       column: 1
+       size:1
+   }
+   EnemyFHead{
+       row:48
+       column: 1
+       size:1
+   }
+
   Platform {
     row: 11
     column: 3
     size: 2
+  }
+
+  EnemyPaopao{
+      row:50
+      column: 1
+      size:1
+  }
+  Bullet{
+      row:8
+      column: 1
+      size:1
   }
 
   Ground {
@@ -50,6 +153,22 @@ Levels.LevelBase {
     column: 0
     size: 5
   }
+  Water{
+      row: 17
+      column: 0
+      size: 8
+  }
+  Water{
+      row: 29
+      column: 0
+      size: 5
+  }
+  Water{
+      row: 59
+      column: 0
+      size: 83
+  }
+
   Platform {
     row: 17
     column: 3
@@ -76,6 +195,17 @@ Levels.LevelBase {
       column:6
       size:4
   }
+
+ Repeater{
+     model: 4
+     Coin{
+         row: 33+index*1
+         column: 7
+         size: 1
+
+     }
+
+ }
   Ground{
       row:34
       column: 0
@@ -92,6 +222,16 @@ Levels.LevelBase {
       column:3
       size:3
   }
+  Repeater{
+      model: 3
+      Coin{
+          row: 47+index*1
+          column: 7
+          size: 1
+
+      }
+
+  }
   //diantiao
   Platform{
       row:61
@@ -103,6 +243,16 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+  Repeater{
+      model: 3
+      Coin{
+          row: 67+index*1
+          column: 4
+          size: 1
+
+      }
+
+  }
   Platform{
       row:73
       column: 3
@@ -112,6 +262,16 @@ Levels.LevelBase {
       row:76
       column: 6
       size:3
+  }
+  Repeater{
+      model: 3
+      Coin{
+          row: 76+index*1
+          column: 7
+          size: 1
+
+      }
+
   }
   Platform{
       row:80
@@ -128,6 +288,16 @@ Levels.LevelBase {
       column: 8
       size:3
   }
+  //金币
+    Repeater{
+        model: 3
+        Coin{
+            row: 89+index*1
+            column: 9
+            size: 1
+
+        }
+    }
   Platform{
       row:92
       column: 3
@@ -143,6 +313,16 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+  Repeater{
+      model: 3
+      Coin{
+          row: 98+index*1
+          column: 4
+          size: 1
+
+      }
+
+  }
   Platform{
       row:101
       column: 6
@@ -157,6 +337,16 @@ Levels.LevelBase {
       row:107
       column: 8
       size: 3
+  }
+  Repeater{
+      model: 3
+      Coin{
+          row: 107+index*1
+          column: 9
+          size: 1
+
+      }
+
   }
 
   Platform{
@@ -179,6 +369,16 @@ Levels.LevelBase {
       column: 6
       size:3
   }
+  Repeater{
+      model: 3
+      Coin{
+          row: 119+index*1
+          column: 7
+          size: 1
+
+      }
+
+  }
   Platform{
       row:122
       column: 3
@@ -194,6 +394,16 @@ Levels.LevelBase {
       column: 6
       size:3
   }
+  Repeater{
+      model: 3
+      Coin{
+          row: 125+index*1
+          column: 7
+          size: 1
+
+      }
+
+  }
   Platform{
       row:131
       column: 3
@@ -208,6 +418,16 @@ Levels.LevelBase {
       row:142
       column: 6
       size:50
+  }
+  Repeater{
+      model: 10
+      Coin{
+          row: 142+index*1
+          column: 7
+          size: 1
+
+      }
+
   }
   Ground1{
       row:142
@@ -239,9 +459,60 @@ Levels.LevelBase {
       column:0
       size:50
   }
-  Ground{
-      row:0
+  Finish{
+      row:192
       column: 0
-      size:1000
+      size:8
   }
+  Finish{
+      row:192
+      column: 1
+      size:8
+  }
+  Finish{
+      row:192
+      column: 2
+      size:8
+  }
+  Finish{
+      row:192
+      column: 3
+      size:8
+  }
+  Finish{
+      row:192
+      column: 4
+      size:8
+  }
+  Finish{
+      row:192
+      column: 5
+      size:8
+  }
+  Finish{
+      row:192
+      column: 6
+      size:8
+  }
+  Finish{
+      row:192
+      column: 7
+      size:8
+  }
+  Finish{
+      row:192
+      column: 8
+      size:8
+  }
+  Finish{
+      row:192
+      column: 9
+      size:8
+  }
+
+//  Ground{
+//      row:0
+//      column: 0
+//      size:1000
+//  }
 }

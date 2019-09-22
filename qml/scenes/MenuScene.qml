@@ -9,25 +9,36 @@
    signal selectPressed
    // background
      MultiResolutionImage{
-         source: "../../assets/background/1.png"
+         source: "../../assets/background/3.png"
          anchors.fill: parent.gameWindowAnchorItem
+     }
+
+     FontLoader{
+         id:flubber
+         source: "../../assets/font/flubber.ttf"
+     }
+     FontLoader{
+         id:p22
+         source: "../../assets/font/P22 Hopper Josephine.ttf"
      }
 
    // the "logo"
    Text {
      id:title
-     y: 30
+     y: 70
      x:400
-     font.pixelSize: 30
+     font.family: flubber.name
+     font.pixelSize: 50
      color: "#e9e9e9"
-     text: "MultiSceneMultiLevel"
+     text: "Crazy charge"
    }
 
    Text{
       id:content
       y:150
       x:400
-      font.pixelSize: 20
+      font.pixelSize: 30
+      font.family:p22.name
       color: "white"
       text:"PRESS  START  BUTTON"
    }
@@ -38,7 +49,7 @@
        y:200
 //       anchors.horizontalCenter:  parent.horizontalCenter
        MenuButton {
-         text: "select"
+         text: "score"
          onClicked: selectPressed()
        }
        MenuButton {
@@ -51,33 +62,33 @@
        id:animateTX
        target: title
        properties: "x"
-       from:480
-       to:115
-       duration:10000
+       from:535
+       to:100
+       duration:9000
        running: true
-       easing: {type:Easing.OutBack}
+
 
    }
     NumberAnimation{
        id:animateCX
        target: content
        properties: "x"
-       from:515
-       to:150
-       duration:10000
+       from:555
+       to:120
+       duration:9000
        running: true
-       easing: {type:Easing.OutBack}
+
 
    }
     NumberAnimation{
        id:animateBX
        target: button2
        properties: "x"
-       from:545
+       from:615
        to:180
-       duration:10000
+       duration:9000
        running: true
-       easing: {type:Easing.OutBack}
+
 
    }
  }

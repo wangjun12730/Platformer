@@ -11,7 +11,12 @@ SceneBase{
   height: 320
   gridSize: 32
 
+  property alias finishView: finishView //Used to invoke the game interface
   property int offsetBeforeScrollingStarts: 240
+
+
+  signal menuBox //Used to send signal when setting is clicked
+  signal backMainMenu //Used to return to the main menu
 
   EntityManager {
     id: entityManager
@@ -21,6 +26,27 @@ SceneBase{
   Rectangle {
     anchors.fill: gameScene.gameWindowAnchorItem
     color: "#74d6f7"
+  }
+
+  //The Settings button in the upper right corner of the game interface
+  Rectangle{
+      id:setting
+      z:100
+      width:32;height: 32
+      anchors.right:gameScene.right
+
+      MultiResolutionImage{
+          anchors.fill:parent
+          source: "../../assets/menu/menu_sound.png"
+      }
+      MouseArea{
+          anchors.fill:parent
+          onClicked: {
+              menuBox()
+          }
+          onPressed: setting.opacity=0.5
+
+      }
   }
 
   // background
@@ -33,13 +59,13 @@ SceneBase{
     // the speed then gets multiplied by this ratio to create the parallax effect
     ratio: Qt.point(0.3,0)
   }
-  ParallaxScrollingBackground {
-    sourceImage: "../../assets/background/layer1.png"
-    anchors.bottom: gameScene.gameWindowAnchorItem.bottom
-    anchors.horizontalCenter: gameScene.gameWindowAnchorItem.horizontalCenter
-    movementVelocity: player.x > offsetBeforeScrollingStarts ? Qt.point(-player.horizontalVelocity,0) : Qt.point(0,0)
-    ratio: Qt.point(0.6,0)
-  }
+//  ParallaxScrollingBackground {
+//    sourceImage: "../../assets/background/layer1.png"
+//    anchors.bottom: gameScene.gameWindowAnchorItem.bottom
+//    anchors.horizontalCenter: gameScene.gameWindowAnchorItem.horizontalCenter
+//    movementVelocity: player.x > offsetBeforeScrollingStarts ? Qt.point(-player.horizontalVelocity,0) : Qt.point(0,0)
+//    ratio: Qt.point(0.6,0)
+//  }
 
   // this is the moving item containing the level and player
   Item {
@@ -54,7 +80,7 @@ SceneBase{
       gravity: Qt.point(0, 25)
 //      debugDrawVisible: true // enable this for physics debugging
       z: 1000
-
+      updatesPerSecondForPhysics : 60
       onPreSolve: {
         //this is called before the Box2DWorld handles contact events
         var entityA = contact.fixtureA.getBody().target
@@ -98,63 +124,386 @@ SceneBase{
     }
   }
 
-  Rectangle {
-    // you should hide those input controls on desktops, not only because they are really ugly in this demo, but because you can move the player with the arrow keys there
-    //visible: !system.desktopPlatform
-    //enabled: visible
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    height: 50
-    width: 150
-    color: "blue"
-    opacity: 0.4
+//  Rectangle {
+//    // you should hide those input controls on desktops, not only because they are really ugly in this demo, but because you can move the player with the arrow keys there
+//    //visible: !system.desktopPlatform
+//    //enabled: visible
+//    anchors.right: parent.right
+//    anchors.bottom: parent.bottom
+//    height: 50
+//    width: 150
+//    color: "blue"
+//    opacity: 0.4
 
-    Rectangle {
-      anchors.centerIn: parent
-      width: 1
-      height: parent.height
-      color: "white"
-    }
-    MultiPointTouchArea {
-      anchors.fill: parent
-      onPressed: {
-        if(touchPoints[0].x < width/2)
-          controller.xAxis = -1
-        else
-          controller.xAxis = 1
+//    Rectangle {
+//      anchors.centerIn: parent
+//      width: 1
+//      height: parent.height
+//      color: "white"
+//    }
+//    MultiPointTouchArea {
+//      anchors.fill: parent
+//      onPressed: {
+//        if(touchPoints[0].x < width/2)
+//          controller.xAxis = -1
+//        else
+//          controller.xAxis = 1
+//      }
+//      onUpdated: {
+//        if(touchPoints[0].x < width/2)
+//          controller.xAxis = -1
+//        else
+//          controller.xAxis = 1
+//      }
+//      onReleased: controller.xAxis = 0
+//    }
+//  }
+
+//  Rectangle {
+//    // same as the above input control
+//    //visible: !system.desktopPlatform
+//    //enabled: visible
+//    anchors.left: parent.left
+//    anchors.bottom: parent.bottom
+//    height: 100
+//    width: 100
+//    color: "green"
+//    opacity: 0.4
+
+//    Text {
+//      anchors.centerIn: parent
+//      text: "jump"
+//      color: "white"
+//      font.pixelSize: 9
+//    }
+//    MouseArea {
+//      anchors.fill: parent
+//      onPressed: player.jump()
+//    }
+//  }
+
+//  Rectangle{
+//      height:100
+//      width: 100
+//      x:20;y:170
+//      opacity: 0.4
+
+
+  //Setting interface keyboard
+      Rectangle{
+        id:top
+        height: 33
+        width: 33
+        opacity: 0.4
+        anchors.left: center.left
+        anchors.bottom: center.top
+        MouseArea {
+          anchors.fill: parent
+          onPressed:{
+              top.opacity=0.2
+              player.jump()
+          }
+          onReleased: top.opacity=0.4
+        }
+        MultiResolutionImage{
+            anchors.fill:parent
+            source: "../../assets/control/controltop.png"
+        }
+
       }
-      onUpdated: {
-        if(touchPoints[0].x < width/2)
-          controller.xAxis = -1
-        else
-          controller.xAxis = 1
+      Rectangle{
+        id:left
+        height: 33
+        width: 33
+        opacity: 0.4
+        anchors.top:center.top
+        anchors.right:center.left
+
+        MultiPointTouchArea {
+          anchors.fill: parent
+          onPressed: {
+            if(touchPoints[0].x)
+              controller.xAxis = -1
+            left.opacity=0.2
+
+          }
+          onUpdated: {
+            if(touchPoints[0].x)
+              controller.xAxis = -1
+          }
+          onReleased:{
+              controller.xAxis = 0
+              left.opacity=0.4
+          }
+        }
+        MultiResolutionImage{
+            anchors.fill:parent
+            source: "../../assets/control/controlleft.png"
+        }
+
       }
-      onReleased: controller.xAxis = 0
-    }
-  }
+      Rectangle{
+          id:center
+          y:203;x:53
+          height: 33
+          width: 33
+          opacity: 0.4
+          MultiResolutionImage{
+              anchors.fill:parent
+              source: "../../assets/control/controlcenter.png"
+          }
 
-  Rectangle {
-    // same as the above input control
-    //visible: !system.desktopPlatform
-    //enabled: visible
-    anchors.left: parent.left
-    anchors.bottom: parent.bottom
-    height: 100
-    width: 100
-    color: "green"
-    opacity: 0.4
+      }
+      Rectangle{
+          id:right
+          height:33;width: 33
+          opacity: 0.4
+          anchors.left:center.right
+          anchors.top: center.top
+          MultiPointTouchArea {
+            anchors.fill: parent
+            onPressed: {
+              if(touchPoints[0].x)
+                controller.xAxis = 1
+              right.opacity=0.2
+            }
+            onUpdated: {
+              if(touchPoints[0].x)
+                controller.xAxis = 1
+            }
+            onReleased: {
+                right.opacity=0.4
+                controller.xAxis = 0
+            }
+          }
+          MultiResolutionImage{
+              anchors.fill:parent
+              source: "../../assets/control/controlright.png"
+          }
 
-    Text {
-      anchors.centerIn: parent
-      text: "jump"
-      color: "white"
-      font.pixelSize: 9
-    }
-    MouseArea {
-      anchors.fill: parent
-      onPressed: player.jump()
-    }
-  }
+      }
+      Rectangle{
+            id:bottom
+            height: 33
+            width: 33
+            opacity: 0.4
+            anchors.top: center.bottom
+            anchors.left: center.left
+            MultiResolutionImage{
+                anchors.fill:parent
+                source: "../../assets/control/controlbuttom.png"
+            }
+            MouseArea{
+                anchors.fill:parent
+                onPressed: {
+                    bottom.opacity=0.2
+                    console.log("clicked  opacity is "+bottom.opacity)
+                }
+
+                onReleased: {
+                    bottom.opacity = 0.4
+                    console.log("released"+bottom.opacity)
+                }
+            }
+
+      }
+//  }
+      FontLoader{
+          id:p22H
+          source: "../../assets/font/P22 Hopper Josephine.ttf"
+      }
+
+    //Game Settings menu bar
+   Rectangle{
+       id:gameSetting
+       anchors.horizontalCenter: gameScene.horizontalCenter
+       width: 300
+       height: 200
+       visible: false
+       enabled: visible
+       color: "#74d6f7"
+       MultiResolutionImage{
+           source: "../../assets/menu/scoreBoard.png"
+           anchors.fill:parent
+       }
+
+       Column{
+           spacing: 10
+            y:30
+           Rectangle{
+                x:97;y:20
+                width: 115;height: 30
+//                anchors.horizontalCenter: gameSetting.horizontalCenter
+                color:"green"
+               Text{
+                 anchors.centerIn: parent
+                 font.family: p22H.name
+                 text:" continue"
+                 font.pixelSize: 20
+                 color: "white"
+               }
+               MultiResolutionImage{
+                   source: "../../assets/menu/menulist.png"
+                   anchors.fill:parent
+                   opacity: 0.5            }
+
+               MouseArea{
+                   anchors.fill:parent
+                   onClicked: {
+                       gameSetting.visible=false
+                       setting.opacity=1 //Set the opacity to 1 for setting
+                   }
+               }
+
+           }
+           Rectangle{
+               x:97
+               width: 115;height: 30
+               color:"green"
+//               anchors.horizontalCenter: gameSetting.horizontalCenter
+               Text{
+                   anchors.centerIn: parent
+                   text:"background music"
+                   font.family: p22H.name
+                   font.pixelSize: 20
+                   color: "white"
+               }
+               MultiResolutionImage{
+                   source: "../../assets/menu/menulist.png"
+                   anchors.fill:parent
+                   opacity: 0.5              }
+
+           }
+           Rectangle{
+               x:97
+               width: 115;height: 30
+               color:"green"
+//               anchors.horizontalCenter: gameSetting.horizontalCenter
+               Text{
+                   anchors.centerIn: parent
+                   text:"game music"
+                   font.family: p22H.name
+                   font.pixelSize: 20
+                   color: "white"
+               }
+               MultiResolutionImage{
+                   source: "../../assets/menu/menulist.png"
+                   anchors.fill:parent
+                   opacity: 0.5              }
+           }
+           Rectangle{
+               x:97
+               width: 115;height: 30
+               color:"green"
+//               anchors.horizontalCenter: parent.horizontalCenter
+               Text{
+                   anchors.centerIn: parent
+                   font.family: p22H.name
+                   font.pixelSize: 20
+                   text:"Back to main menu"
+                   color: "white"
+               }
+               MultiResolutionImage{
+                   source: "../../assets/menu/menulist.png"
+                   anchors.fill:parent
+                   opacity: 0.5             }
+               MouseArea{
+                   anchors.fill:parent
+                   onClicked:{
+                       gameSetting.visible=false
+                       backMainMenu()
+                       setting.opacity=1 //Set the opacity to 1 for setting
+                   }
+               }
+           }
+       }
+   }
+   //The interface that pops up after the game is finished
+   Rectangle{
+       id:finishView
+       anchors.fill:parent
+       opacity: visible? 1:0
+       visible: false
+       enabled: visible
+
+       MultiResolutionImage{
+           anchors.fill: parent
+           source: "../../assets/menu/win.png"
+       }
+       Column{
+           spacing: 10
+             y:180
+           MenuButton{
+
+               x:200
+               text:"play again"
+               buttonText.font.family: p22H.name
+               onClicked:{
+                    player.x=20
+                   player.y=20
+                   finishView.visible=false
+               }
+           }
+           MenuButton{
+               x:192
+               text:"back to menu"
+               buttonText.font.family: p22H.name
+               onClicked:{
+                   player.x=20
+                   player.y=20
+                  finishView.visible=false
+                   backMainMenu()
+               }
+           }
+        }
+//       Timer{
+//           interval:100
+//           repeat: true
+//           running: true
+
+//           onTriggered: {
+//               parent.visible=true
+//           }
+//       }
+
+   }
+
+   //An interface that pops up when a character dies
+//   Rectangle{
+//       id:playerDie
+//       opacity: visible? 1:0
+//       visible: true
+//       enabled: visible
+//       z:1000
+//       color: "#e9e9e9"
+//       anchors.fill: parent
+//       Item{
+//            width:parent.width
+//            height: 1/3*parent.width
+//            anchors.top:parent.top
+//            Rectangle{
+//                anchors.fill:parent
+//                MultiResolutionImage{
+//                    anchors.fill:parent
+//                    source: "../../assets/menu/gameOver.png"
+//                }
+//           }
+//       }
+//       Item{
+//           height: 0.5*parent.height
+//           width: parent.width
+//           anchors.bottom: parent.bottom
+//           Rectangle{
+//               anchors.fill:parent
+//               color: "blue"
+//           }
+//       }
+//   }
+
+   onMenuBox: {
+       gameSetting.visible=true
+
+   }
 
   // on desktops, you can move the player with the arrow keys, on mobiles we are using our custom inputs above to modify the controller axis values. With this approach, we only need one actual logic for the movement, always referring to the axis values of the controller
   Keys.forwardTo: controller

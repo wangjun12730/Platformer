@@ -30,7 +30,7 @@ TiledEntityBase {
       repeat: true
 
       onTriggered: {
-          console.debug("pictureNum = "+pictureNum)
+         // console.debug("pictureNum = "+pictureNum)
           pictureNum++
       }
     }

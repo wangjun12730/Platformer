@@ -3,7 +3,7 @@ import Felgo 3.0
 
 TiledEntityBase{
     id:obstacleBase
-    entityType: "obstacle"
+    entityType: "enemy"
 
 
     Tile{
@@ -18,6 +18,8 @@ TiledEntityBase{
         anchors.centerIn: parent
         active: parent.visible
       bodyType: Body.Static
+      categories: Box.Category4
+      collidesWith: Box.Category1|Box.Category2 | Box.Category3 |Box.Category5
       fixture.onBeginContact: {
         var otherEntity = other.getBody().target
         if(otherEntity.entityType === "player") parent.visible=false
