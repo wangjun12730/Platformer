@@ -39,7 +39,6 @@ DISTFILES += \
     qml/entities/Ground1.qml \
     qml/levels/Level2.qml \
     qml/entities/EnemyBase.qml \
-    qml/entities/ObstacleBase.qml \
     qml/entities/Coin.qml \
     qml/entities/EnemyPet.qml \
     qml/entities/EnemyCrystallo.qml \
@@ -53,7 +52,6 @@ DISTFILES += \
     qml/entities/Diamond.qml \
     qml/entities/Magic.qml \
     qml/entities/EnemyFHead.qml \
-    qml/entities/EnemyPaopao.qml \
     qml/entities/Bullet.qml \
     qml/entities/Water.qml \
     qml/entities/Brick.qml

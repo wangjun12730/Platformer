@@ -55,7 +55,15 @@ EntityBase {
       var otherEntity = other.getBody().target
       if(otherEntity.entityType === "enemy"){
           console.log("player die")
+          gameScene.score=0
+          gameScene.bullet=0
           die()
+      }
+      if (otherEntity.entityType==="coin") gameScene.score+=100
+      if(otherEntity.entityType==="diamond") gameScene.score+=1000
+      if(otherEntity.entityType==="magic") {
+          gameScene.bullet+=10
+          gameScene.score+=100
       }
     }
 
@@ -93,8 +101,10 @@ EntityBase {
     }
   }
   function die(){
+      playerDie.visible=true
       player.x=15
       player.y=100
+
   }
 }
 

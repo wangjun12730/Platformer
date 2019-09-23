@@ -2,8 +2,8 @@ import QtQuick 2.0
 import Felgo 3.0
 
 TiledEntityBase{
-    id:diamond
-    entityType: "diamond"
+    id:magic
+    entityType: "magic"
     property bool collected: false
     property int  pictureNum: 1
 

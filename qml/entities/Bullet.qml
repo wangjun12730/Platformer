@@ -1,29 +1,27 @@
 import QtQuick 2.0
 import Felgo 3.0
 
+//bullet
 TiledEntityBase{
     id:bullet
     entityType: "bullet"
-
-    Rectangle {
-               id: mask
-               width: 0.3*parent.width
-               height: 0.3*parent.height
-               radius: height/2
-               color:"red"
-               visible: true
-
-           }
+    z:100
+    Tile{
+        image: "../../assets/paopao/paopao.png"
+    }
 
     BoxCollider{
         id:collider
-        anchors.fill:mask
         bodyType: Body.Dynamic
         categories: Box.Category10
-        collidesWith: Box.Category1 |Box.Category2 |Box.Category1
+        collidesWith:Box.Category3
 //        force: Qt.point(0,200)
         collisionTestingOnlyMode: true
-        fixture.onBeginContact: console.log("nihao")
+        fixture.onBeginContact: {
+            bullet.visible=false
+            collider.active=false
+            console.log("nihao")
+        }
     }
 //    Timer{
 //        id:directionTimer
@@ -40,8 +38,8 @@ TiledEntityBase{
         id:animateBX
         target: bullet
         properties: "x"
-        from:20
-        to:180
+        from:x
+        to:player.x+480
         duration:9000
         running: true
     }

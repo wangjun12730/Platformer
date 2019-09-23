@@ -3,75 +3,18 @@ import Felgo 3.0
 
 EnemyBase{
     id : xiezi
-    entityType: "enemy"
     variationType: "xiezi"
-//    startX: x
-//    startY: y
-    property alias directionTimer: directionTimer
 
-    //-1:怪物向左移动    1：向右
-    property int direction: -1
-    property int speed: 25
-
-    Tile{
-        id : enemy
-        property alias enemy : enemy
-        sprite.visible: !hidden
-        sprite.source: "../../assets/xiezi/"+pictureNum%6+".png"
-        sprite.mirror: collider.linearVelocity.x > 0 ? true : false
+    //When the scorpion's horizontal distance from the player is less than 320, the scorpion starts to move to the left
+    directionTimer.onTriggered: {
+         if(xiezi.x-player.x<320) collider.linearVelocity.x=-30
     }
+    directionTimer.interval: 100
 
+    direction: -1//-1 left
+    enemy.sprite.source:"../../assets/xiezi/"+pictureNum%6+".png"
 
-    // main collider
-    BoxCollider {
-      id: collider
-      bodyType: Body.Dynamic
-
-      // when dead
-      //当dead的时候   为false
-      active: !alive ? false : true
-      anchors.fill:parent
-      //移动的怪物
-      categories: Box.Category3
-      //1为玩家  2为地面
-      // Category1: 玩家, Category2: 地面
-      // Category5: 玩家脚下的那部分区域
-      //3 latform
-      collidesWith: Box.Category1 | Box.Category2 | Box.Category5
-
-      linearVelocity: Qt.point(direction * speed, 0)
-
-      fixture.onBeginContact: {
-          var otherEntity = other.getBody().target
-          if(otherEntity.entityType === "player") reset()//Reset every time  touch a player
-          //collider the bullet , died
-          if(otherEntity.entityType==="bullet") {
-
-              die()
-
-          }
-      }
-
-//      onLinearVelocityChanged: {
-//        // 停止移动，就像相反的方向移动
-//        if(linearVelocity.x === 0)
-//          crystallo.direction = crystallo.direction*-1             //1 or -1
-//        // 确保速度恒定
-//        linearVelocity.x = direction * speed    //35
-//      }
-    }
-
-
-   //Turn the enemy at regular intervals
-    Timer{
-        id:directionTimer
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-//            console.log(xiezi.x)
-            if(xiezi.x-player.x<320) collider.linearVelocity.x=-30
-        }
+    collider.onLinearVelocityChanged: {
     }
 
     // reset the opponent

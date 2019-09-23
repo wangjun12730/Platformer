@@ -33,6 +33,15 @@
      text: "Crazy charge"
    }
 
+   //menu backgroundmusic
+   BackgroundMusic{
+       id:menuBackgroundMusic
+       source: "../../assets/music/editMusic.mp3"
+   }
+   function closemusic(){
+       menuBackgroundMusic.stop()
+   }
+
    Text{
       id:content
       y:150

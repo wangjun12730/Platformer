@@ -13,6 +13,8 @@ SceneBase{
 
   property alias finishView: finishView //Used to invoke the game interface
   property int offsetBeforeScrollingStarts: 240
+  property int score: 0//record scores
+  property int bullet:0//record bullets
 
 
   signal menuBox //Used to send signal when setting is clicked
@@ -20,6 +22,21 @@ SceneBase{
 
   EntityManager {
     id: entityManager
+    entityContainer: gameScene
+
+    }
+
+//gameBackGroundMusic
+  BackgroundMusic{
+      id:gameBackgroundMusic
+      playing: true
+      source: "../../assets/music/game.mp3"
+  }
+  function closemusic(){
+      gameBackgroundMusic.stop()
+  }
+  function playmusic(){
+
   }
 
   // the whole screen is filled with an incredibly beautiful blue ...
@@ -51,13 +68,27 @@ SceneBase{
 
   //Record the score
   Text{
+       id:scores
         z:10
-        anchors.horizontalCenter: parent.horizontalCenter
-        y:12
+        anchors.left:bullets.right
+        y:0
         color: "white"
         font.family: p22H.name
         font.pixelSize: 30
-        text:"Score:0"
+        text:"Score:"+score
+  }
+
+  //Record the Scoresranking
+
+  Text{
+      id:bullets
+      z:10
+      x:0
+      y:0
+      color:"white"
+      font.family: p22H.name
+      font.pixelSize: 30
+      text:"bullets:"+bullet+"  "
   }
 
 
@@ -82,8 +113,8 @@ SceneBase{
   // this is the moving item containing the level and player
   Item {
     id: viewPort
-    height: level.height
-    width: level.width
+    height: 320
+    width: 480
     anchors.bottom: gameScene.gameWindowAnchorItem.bottom
     x: player.x > offsetBeforeScrollingStarts ? offsetBeforeScrollingStarts-player.x : 0
 
@@ -110,6 +141,12 @@ SceneBase{
     Level1 {
       id: level
     }
+
+//    property alias loader: loader.source
+//    Loader{
+//        id:loader
+////        source: Level1
+//    }
 
     Player {
       id: player
@@ -319,7 +356,79 @@ SceneBase{
             }
 
       }
+
+    //The player fires and puts bullets
+      Rectangle{
+          id:a
+          y:215;x:360
+
+          width:32
+          height: 20
+          radius: 10
+          opacity: 0.5
+          color: "#e9e9e9"
+          Text {
+              anchors.centerIn: parent
+              text: qsTr("A")
+          }
+          MouseArea{
+              id:area
+              anchors.fill:parent
+              enabled: gameScene.bullet<=0?false:true
+
+              onClicked: {
+
+                  var newEntityProperties = {
+
+//                                      x:player.x > offsetBeforeScrollingStarts ?player.x/2+32:player.x+32,
+                                        x:player.x>offsetBeforeScrollingStarts?(offsetBeforeScrollingStarts-player.width/2):player.x,
+                                      y:player.y+16,
+                                  }
+                  console.log(player.x+"")
+                   entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("../entities/Bullet.qml"),newEntityProperties)
+                  bullet-=1
+              }
+
+              onPressed: {
+                  a.opacity=0.3
+              }
+
+              onReleased: {
+                  a.opacity = 0.5
+              }
+          }
+
+      }
+      //Player jump key
+      Rectangle{
+          id:jump
+          y:215;x:402
+          width:32
+          height: 20
+          radius: 10
+          color: "#e9e9e9"
+          opacity: 0.5
+          Text {
+              anchors.centerIn: parent
+              text: qsTr("Jump")
+          }
+          MouseArea{
+              anchors.fill:parent
+              onPressed: {
+                  player.jump()
+                  jump.opacity=0.3
+              }
+
+              onReleased: {
+                  jump.opacity = 0.5
+              }
+          }
+      }
+
+
 //  }
+
+      // Load the fonts
       FontLoader{
           id:p22H
           source: "../../assets/font/P22 Hopper Josephine.ttf"
@@ -479,38 +588,61 @@ SceneBase{
 //       }
 
    }
-
+   property alias playerDie: playerDie
    //An interface that pops up when a character dies
-//   Rectangle{
-//       id:playerDie
-//       opacity: visible? 1:0
-//       visible: true
-//       enabled: visible
-//       z:1000
-//       color: "#e9e9e9"
-//       anchors.fill: parent
-//       Item{
-//            width:parent.width
-//            height: 1/3*parent.width
-//            anchors.top:parent.top
-//            Rectangle{
-//                anchors.fill:parent
-//                MultiResolutionImage{
-//                    anchors.fill:parent
-//                    source: "../../assets/menu/gameOver.png"
-//                }
-//           }
-//       }
-//       Item{
-//           height: 0.5*parent.height
-//           width: parent.width
-//           anchors.bottom: parent.bottom
-//           Rectangle{
-//               anchors.fill:parent
-//               color: "blue"
-//           }
-//       }
-//   }
+   Rectangle{
+       id:playerDie
+       opacity: visible? 1:0
+       visible:false
+       enabled: visible
+       z:1000
+       color: "#e9e9e9"
+       anchors.fill: parent
+       Item{
+            width:parent.width
+            height: 1/3*parent.width
+            anchors.top:parent.top
+            Rectangle{
+                anchors.fill:parent
+                MultiResolutionImage{
+                    anchors.fill:parent
+                    source: "../../assets/menu/gameOver.png"
+                }
+           }
+       }
+       Item{
+           height: 0.5*parent.height
+           width: parent.width
+           anchors.bottom: parent.bottom
+           Text {
+               anchors.horizontalCenter: parent.horizontalCenter
+               font.family: p22H.name
+               font.pixelSize: 30
+               text: qsTr("would you want play again?")
+           }
+           Row{
+               anchors.horizontalCenter: parent.horizontalCenter
+               y:50
+               spacing: 10
+                  Rectangle{
+                    width: 32
+                    height: 32
+                    color:"#e9e9e9"
+                    Text{
+                        text:"again"
+                    }
+                  }
+                  Rectangle{
+                      width: 32
+                      height: 32
+                      color: "#e9e9e9"
+                      Text{
+                          text:"back"
+                      }
+                  }
+       }
+   }
+   }
 
    onMenuBox: {
        gameSetting.visible=true

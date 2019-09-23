@@ -13,13 +13,9 @@ Levels.LevelBase {
 
 
   // you could draw your level on a graph paper and then add the tiles here only by defining their row, column and size
+ function reset(){
 
-  Bullet{
-      row:6
-      column: 6
-      size:1
-  }
-
+ }
   Ground {
     row: 0
     column: 0
@@ -72,7 +68,7 @@ Levels.LevelBase {
   }
 
   EnemyPet{
-      row:4
+      row:3
       column:4
       size:1
   }
@@ -343,7 +339,7 @@ Levels.LevelBase {
       size:3
   }
    EnemyPet{
-       row:82
+       row:80
        column: 4
        size:1
        directionTimer.interval: 2500
@@ -464,7 +460,7 @@ Levels.LevelBase {
       size:3
   }
   EnemyPet{
-      row:112
+      row:110
       column: 4
       size:1
       directionTimer.interval: 2500

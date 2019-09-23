@@ -49,6 +49,9 @@ GameWindow {
    onStartPressed:{
        gameScene.enabled=true
        gameWindow.state = "game"
+//       gameScene.loader = "../levels/Level1.qml"
+       menuScene.closemusic()
+//       gameScene.playmusic()
    }
 
   }
@@ -58,6 +61,7 @@ GameWindow {
     onBackMainMenu: {
         gameWindow.state="menu"
         enabled:false
+
     }
   }
   Scoresranking{
