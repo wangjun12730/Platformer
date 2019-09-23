@@ -49,6 +49,18 @@ SceneBase{
       }
   }
 
+  //Record the score
+  Text{
+        z:10
+        anchors.horizontalCenter: parent.horizontalCenter
+        y:12
+        color: "white"
+        font.family: p22H.name
+        font.pixelSize: 30
+        text:"Score:0"
+  }
+
+
   // background
   ParallaxScrollingBackground {
     sourceImage: "../../assets/background/2.png"

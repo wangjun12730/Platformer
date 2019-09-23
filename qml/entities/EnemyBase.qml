@@ -9,11 +9,11 @@ TiledEntityBase {
 
     property int pictureNum: 1
 
-    //怪物是否活着
+    //Determine if the monster is alive
     property bool alive: true
-    //是否隐藏
+    //Whether to hide monsters
     property bool hidden: false
-    z: 1 // 让怪物显示在最前面
+    z: 1
 
     // this timer hides the opponent a few seconds after its death
     Timer {
@@ -22,7 +22,7 @@ TiledEntityBase {
 
       onTriggered: hidden = true
     }
-    //用一个计时器   来处理怪物的移动的   循环贴图
+    //Use the timer loop map to make the monster look like it's moving
     Timer {
       id: switchPictureTimer
       interval: 300

@@ -13,6 +13,13 @@ Levels.LevelBase {
 
 
   // you could draw your level on a graph paper and then add the tiles here only by defining their row, column and size
+
+  Bullet{
+      row:6
+      column: 6
+      size:1
+  }
+
   Ground {
     row: 0
     column: 0
@@ -40,6 +47,12 @@ Levels.LevelBase {
     column: 3
     size: 3
   }
+  Magic{
+      row:3
+      column: 4
+      size:1
+  }
+
 //  ObstacleBase{
 //      row:3
 //      column:4
@@ -60,7 +73,7 @@ Levels.LevelBase {
 
   EnemyPet{
       row:4
-      column: 8
+      column:4
       size:1
   }
 
@@ -79,74 +92,38 @@ Levels.LevelBase {
     column: 6
     size: 4
   }
-  EnemyXiezi{
+  EnemyFHead{
       row:12
       column: 4
       size:1
-      directionTimer.interval: 1000
+      directionTimer.interval: 6130
+      directionTimer.onTriggered: collider.linearVelocity.y=-480
   }
-  EnemyXiezi{
-      row:7
-      column: 2
+  EnemyFHead{
+      row:13
+      column: 4
       size:1
-      directionTimer.interval:5000
+      directionTimer.interval: 5582
+      directionTimer.onTriggered: collider.linearVelocity.y=-480
   }
-   EnemyDragon{
-       row:12
-       column: 2
-       size:1
-       directionTimer.interval: 5000
-   }
-   EnemyMonster{
-       row:20
-       column: 2
-       size:1
-       directionTimer.interval: 5000
-   }
-   EnemySnail{
-       row:30
-       column: 2
-       size:1
-       directionTimer.interval: 5000
-   }
-   EnemyIceBlock{
-       row:32
-       column: 2
-       size:1
-       directionTimer.interval: 5000
-   }
-   Diamond{
-       row:35
-       column: 1
-       size:1
-   }
-   Magic{
-       row:38
-       column: 1
-       size:1
-   }
-   EnemyFHead{
-       row:48
-       column: 1
-       size:1
-   }
+
 
   Platform {
-    row: 11
+    row: 12
     column: 3
     size: 2
   }
 
-  EnemyPaopao{
-      row:50
-      column: 1
-      size:1
-  }
-  Bullet{
-      row:8
-      column: 1
-      size:1
-  }
+//  EnemyPaopao{
+//      row:50
+//      column: 1
+//      size:1
+//  }
+//  Bullet{
+//      row:8
+//      column: 1
+//      size:1
+//  }
 
   Ground {
     row: 12
@@ -174,6 +151,30 @@ Levels.LevelBase {
     column: 3
     size: 6
   }
+  Brick{
+      row:17
+      column: 6
+      size:6
+  }
+  EnemyDragon{
+      row:17
+      column: 7
+      size:1
+      directionTimer.interval: 4200
+  }
+  EnemyDragon{
+      row:18
+      column: 7
+      size:1
+       directionTimer.interval: 4200
+  }
+  EnemyDragon{
+      row:19
+      column: 7
+      size:1
+       directionTimer.interval: 4200
+  }
+
   Ground{
       row:25
       column:0
@@ -211,17 +212,66 @@ Levels.LevelBase {
       column: 0
       size:25
   }
+  EnemyXiezi{
+      row:58
+      column: 1
+      size:1
+  }
+
+  Brick{
+      row:52
+      column:6
+      size:7
+  }
+  EnemyDragon{
+      row:52
+      column: 7
+      size:1
+      directionTimer.interval: 5800
+  }
+  EnemyDragon{
+      row:53
+      column: 7
+      size:1
+      directionTimer.interval: 5800
+  }
+  EnemyDragon{
+      row:54
+      column: 7
+      size:1
+      directionTimer.interval: 5800
+  }
+  Diamond{
+      row:53
+      column: 6
+      size:1
+  }
 
   Platform{
       row:40
       column:6
       size:4
   }
+  EnemyMonster{
+      row:40
+      column:7
+      size:1
+      directionTimer.interval: 4000
+  }
+
   Platform{
       row:47
       column:3
       size:3
   }
+  EnemyCrystallo{
+      row:47
+      column: 4
+      size:1
+      directionTimer.interval: 2500
+
+  }
+
   Repeater{
       model: 3
       Coin{
@@ -238,6 +288,13 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+  EnemySnail{
+      row:61
+      column: 4
+      size:1
+      directionTimer.interval: 3000
+  }
+
   Platform{
       row:67
       column: 3
@@ -258,6 +315,13 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+  EnemyMonster{
+      row:73
+      column: 4
+      size:1
+      directionTimer.interval: 3000
+  }
+
   Platform{
       row:76
       column: 6
@@ -278,11 +342,42 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+   EnemyPet{
+       row:82
+       column: 4
+       size:1
+       directionTimer.interval: 2500
+   }
+
   Platform{
       row:85
       column: 6
       size:3
   }
+  EnemyFHead{
+      row:85
+      column: 7
+      size:1
+
+  }
+  EnemyFHead{
+      row:86
+      column: 7
+      size:1
+      directionTimer.interval: 2530
+  }
+  EnemyFHead{
+      row:87
+      column: 7
+      size:1
+      directionTimer.interval: 1620
+  }
+  Magic{
+      row:89
+      column:5
+      size:1
+  }
+
   Platform{
       row:89
       column: 8
@@ -303,6 +398,13 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+  EnemyIceBlock{
+      row:92
+      column:3
+      size:1
+      directionTimer.interval: 3000
+  }
+
   Platform{
       row:95
       column: 6
@@ -328,6 +430,13 @@ Levels.LevelBase {
       column: 6
       size:3
   }
+  EnemyIceBlock{
+      row:101
+      column: 7
+      size:1
+      directionTimer.interval: 2800
+  }
+
   Platform{
       row:104
       column: 3
@@ -354,6 +463,13 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+  EnemyPet{
+      row:112
+      column: 4
+      size:1
+      directionTimer.interval: 2500
+  }
+
   Platform{
       row:113
       column: 6
@@ -364,6 +480,38 @@ Levels.LevelBase {
       column: 3
       size:3
   }
+//  EnemyFHead{
+//      row:116
+//      column: 4
+//      size:1
+//      directionTimer.interval: 2100
+//      directionTimer.onTriggered: {
+//          collider.linearVelocity.y=-450
+//      }
+//  }
+  Diamond{
+      row:116
+      column: 4
+      size:1
+
+  }
+
+  EnemyFHead{
+      row:117
+      column: 4
+      size:1
+      directionTimer.interval: 3100
+      directionTimer.onTriggered: {
+          collider.linearVelocity.y=-500
+      }
+  }
+//  EnemyFHead{
+//      row:118
+//      column: 8
+//      size:1
+//      directionTimer.interval: 1100
+//  }
+
   Platform{
       row:119
       column: 6
@@ -389,26 +537,69 @@ Levels.LevelBase {
       column: 3
       size:3
   }
-  Platform{
-      row:125
-      column: 6
-      size:3
+  EnemyMonster{
+      row:122
+      column: 4
+      size:1
+      directionTimer.interval: 5500
   }
   Repeater{
       model: 3
       Coin{
           row: 125+index*1
-          column: 7
+          column: 4
           size: 1
 
       }
 
   }
+
+  Platform{
+      row:125
+      column: 6
+      size:3
+  }
+  Brick{
+      row:129
+      column: 6
+      size:12
+  }
+  EnemyDragon{
+      row:129
+      column: 7
+      size:1
+      directionTimer.interval: 12000
+  }
+  EnemyDragon{
+      row:130
+      column: 7
+      size:1
+      directionTimer.interval: 12000
+  }
+  EnemyDragon{
+      row:131
+      column: 7
+      size:1
+      directionTimer.interval: 12000
+  }
+  EnemyDragon{
+      row:132
+      column: 7
+      size:1
+      directionTimer.interval: 12000
+  }
+
   Platform{
       row:131
       column: 3
       size:3
   }
+  Diamond{
+      row:135
+      column: 8
+      size:1
+  }
+
   Platform{
       row:137
       column: 3
@@ -429,6 +620,55 @@ Levels.LevelBase {
       }
 
   }
+  EnemyMonster{
+      row:152
+      column: 7
+      size:1
+      directionTimer.interval: 7000
+  }
+  EnemyIceBlock{
+      row:155
+      column: 7
+      size:1
+      directionTimer.interval: 15000
+  }
+  EnemyCrystallo{
+      row:157
+      column: 7
+      size:1
+      directionTimer.interval: 25000
+  }
+
+  EnemySnail{
+      row:158
+      column:7
+      size:1
+      directionTimer.interval: 36500
+  }
+  EnemyPet{
+      row:170
+      column:7
+      size:1
+      directionTimer.interval: 16500
+  }
+  EnemyIceBlock{
+      row:180
+      column:7
+      size:1
+      directionTimer.interval: 5500
+  }
+
+  Repeater{
+      model: 10
+      Coin{
+          row: 182+index*1
+          column: 9
+          size: 1
+
+      }
+
+  }
+
   Ground1{
       row:142
       column:5
@@ -510,9 +750,9 @@ Levels.LevelBase {
       size:8
   }
 
-//  Ground{
-//      row:0
-//      column: 0
-//      size:1000
-//  }
+  Ground{
+      row:0
+      column: 0
+      size:1000
+  }
 }

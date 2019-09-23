@@ -55,5 +55,6 @@ DISTFILES += \
     qml/entities/EnemyFHead.qml \
     qml/entities/EnemyPaopao.qml \
     qml/entities/Bullet.qml \
-    qml/entities/Water.qml
+    qml/entities/Water.qml \
+    qml/entities/Brick.qml
 

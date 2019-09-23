@@ -22,7 +22,7 @@ TiledEntityBase {
     anchors.fill: parent
     bodyType: Body.Static
     categories: Box.Category2
-    collidesWith: Box.Category1 | Box.Category3
+    collidesWith: Box.Category1 | Box.Category3 |Box.Category10
     fixture.onBeginContact: {
       var otherEntity = other.getBody().target
       if(otherEntity.entityType === "player") player.contacts++

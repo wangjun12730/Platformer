@@ -6,10 +6,14 @@ EnemyBase{
     entityType: "enemy"
     variationType: "fhead"
 
+//    startX: row*gameScene.gridSize
+//    startY: level.height - (column+1)*gameScene.gridSize
+
     //-1:怪物向左移动    1：向右
     property int direction: -1
     property int speed: 25
-//    property alias directionTimer: directionTimer
+    property alias directionTimer: directionTimer
+    property alias collider: collider
     Tile{
         id : enemy
         property alias enemy : enemy
@@ -18,23 +22,17 @@ EnemyBase{
 //        sprite.mirror: true
 
     }
-    Timer{
-       id:mirror
-       interval:100
-       repeat: false
-       onTriggered: {
-                console.log("mirror")
-               if(collider.linearVelocity.x<0) enemy.sprite.mirror=true
-               if(collider.linearVelocity.x>0) enemy.sprite.mirror=false
-       }
-     }
+//    Timer{
+//       id:mirror
+//       interval:100
+//       repeat: false
+//       onTriggered: {
+//                console.log("mirror")
+//               if(collider.linearVelocity.x<0) enemy.sprite.mirror=true
+//               if(collider.linearVelocity.x>0) enemy.sprite.mirror=false
+//       }
+//     }
 
-    onAliveChanged: {
-      if(!alive) {
-        leftAbyssChecker.contacts = 0
-        rightAbyssChecker.contacts = 0
-      }
-    }
 
     // main collider
     BoxCollider {
@@ -55,6 +53,17 @@ EnemyBase{
 
       linearVelocity: Qt.point(0, direction * speed)
 
+      fixture.onBeginContact: {
+          var otherEntity = other.getBody().target
+          if(otherEntity.entityType === "player") reset()//Reset every time  touch a player
+          //collider the bullet , died
+          if(otherEntity.entityType==="bullet") {
+
+              die()
+
+          }
+      }
+
 //      onLinearVelocityChanged: {
 //        // 停止移动，就像相反的方向移动
 //        if(linearVelocity.x === 0)
@@ -62,6 +71,10 @@ EnemyBase{
 //        // 确保速度恒定
 //        linearVelocity.x = direction * speed    //35
 //      }
+    }
+    Component.onCompleted: {
+        startX=x
+        startY=y
     }
 
 
@@ -72,22 +85,17 @@ EnemyBase{
         running: true
         repeat: true
         onTriggered: {
-            collider.linearVelocity.y = -420
-             collider.linearVelocity.x=40
-            mirror.start()
+            collider.linearVelocity.y = -320
+//             collider.linearVelocity.x=40
+//            mirror.start()
         }
     }
 
     // reset the opponent
     function reset() {
-      // this is the reset function of the base entity Opponent.qml
-      reset_super()
-
-      // reset direction
-      direction = -1
-
-      // reset force
-      collider.linearVelocity.x = Qt.point(direction * speed, 0)
+        x=startX
+        y=startY
+        alive=true
     }
 
 }

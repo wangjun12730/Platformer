@@ -46,9 +46,19 @@ EntityBase {
     categories: Box.Category1
 //    1 plater  2 ground   3 platform  4 enemy   5  a entity below the ground  6  coins  7 plant 8 finish
     //9 resetSensor
-    collidesWith: Box.Category2 | Box.Category3 | Box.Category4 | Box.Category5 |Box.Category6 |Box.Category8 |Box.Category9
+    collidesWith: Box.Category2 | Box.Category3 | Box.Category4 | Box.Category5 |Box.Category6 |Box.Category8 |Box.Category9 |Box.Category10
 //    // apply the horizontal value of the TwoAxisController as force to move the player left and right
     force: Qt.point(controller.xAxis*20*32,0)
+
+    //collision detection
+    fixture.onBeginContact: {
+      var otherEntity = other.getBody().target
+      if(otherEntity.entityType === "enemy"){
+          console.log("player die")
+          die()
+      }
+    }
+
     // limit the horizontal velocity
     onLinearVelocityChanged: {
       if(linearVelocity.x > 170) linearVelocity.x = 170
@@ -81,6 +91,10 @@ EntityBase {
       // for the jump, we simply set the upwards velocity of the collider
       collider.linearVelocity.y = -420
     }
+  }
+  function die(){
+      player.x=15
+      player.y=100
   }
 }
 

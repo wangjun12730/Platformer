@@ -6,6 +6,9 @@ EnemyBase{
     entityType: "enemy"
     variationType: "iceBlock"
 
+//    startX: x
+//    startY: y
+
     //-1:怪物向左移动    1：向右
     property int direction: 1
     property int speed: 25
@@ -17,13 +20,6 @@ EnemyBase{
         sprite.source: "../../assets/iceblock/left-"+pictureNum%3+".png"
 
         sprite.mirror: collider.linearVelocity.x > 0 ? true : false
-    }
-
-    onAliveChanged: {
-      if(!alive) {
-        leftAbyssChecker.contacts = 0
-        rightAbyssChecker.contacts = 0
-      }
     }
 
     // main collider
@@ -44,6 +40,17 @@ EnemyBase{
       collidesWith: Box.Category1 | Box.Category2 | Box.Category5
 
       linearVelocity: Qt.point(direction * speed, 0)
+
+      fixture.onBeginContact: {
+          var otherEntity = other.getBody().target
+          if(otherEntity.entityType === "player") reset()//Reset every time  touch a player
+          //collider the bullet , died
+          if(otherEntity.entityType==="bullet") {
+
+              die()
+
+          }
+      }
 
       onLinearVelocityChanged: {
         // 停止移动，就像相反的方向移动
@@ -68,14 +75,9 @@ EnemyBase{
 
     // reset the opponent
     function reset() {
-      // this is the reset function of the base entity Opponent.qml
-      reset_super()
-
-      // reset direction
-      direction = -1
-
-      // reset force
-      collider.linearVelocity.x = Qt.point(direction * speed, 0)
+//        x=startX
+//        y=startY
+        alive=true
     }
 
 }
