@@ -61,8 +61,14 @@ EntityBase {
       }
       if (otherEntity.entityType==="coin") gameScene.score+=100
       if(otherEntity.entityType==="diamond") gameScene.score+=1000
+      if(otherEntity.entityType==="resetSensor") {
+          console.log("player die")
+          gameScene.score=0
+          gameScene.bullet=0
+          die()
+      }
       if(otherEntity.entityType==="magic") {
-          gameScene.bullet+=10
+          gameScene.bullet+=30
           gameScene.score+=100
       }
     }

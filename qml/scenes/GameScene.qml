@@ -178,11 +178,11 @@ SceneBase{
         player.y = 100
       }
       // this is just for you to see how the sensor moves, in your real game, you should position it lower, outside of the visible area
-      Rectangle {
-        anchors.fill: parent
-        color: "yellow"
-        opacity: 0.5
-      }
+//      Rectangle {
+//        anchors.fill: parent
+//        color: "yellow"
+//        opacity: 0.5
+//      }
     }
   }
 
@@ -388,7 +388,7 @@ SceneBase{
           color: "#e9e9e9"
           Text {
               anchors.centerIn: parent
-              text: qsTr("Space")
+              text: qsTr("O")
           }
           MouseArea{
               id:area
@@ -603,7 +603,7 @@ SceneBase{
        id:finishView
        anchors.fill:parent
        opacity: visible? 1:0
-       visible: true
+       visible: false
        enabled: visible
 
        MultiResolutionImage{
@@ -740,7 +740,7 @@ SceneBase{
                            "down": Qt.Key_S,
                            "left": Qt.Key_A,
                            "right": Qt.Key_D,
-                           "fire": Qt.Key_Space
+                           "fire": Qt.Key_O
                    }
     onInputActionPressed: {
       console.debug("key pressed actionName " + actionName)
