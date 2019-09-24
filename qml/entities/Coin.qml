@@ -55,8 +55,8 @@ TiledEntityBase{
         coin.collected = true
     }
 
-    // reset coin
-    function reset() {
-        coin.collected = false
-    }
+//    // reset coin
+//    function reset() {
+//        coin.collected = false
+//    }
 }

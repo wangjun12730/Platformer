@@ -22,8 +22,8 @@ TiledEntityBase{
         active: parent.visible
         fixture.onBeginContact:collected=true
     }
-    // reset diamond
-    function reset() {
-        coin.collected = false
-    }
+//    // reset diamond
+//    function reset() {
+//        coin.collected = false
+//    }
 }

@@ -13,9 +13,9 @@ Levels.LevelBase {
 
 
   // you could draw your level on a graph paper and then add the tiles here only by defining their row, column and size
- function reset(){
+// function reset(){
 
- }
+// }
   Ground {
     row: 0
     column: 0
@@ -526,13 +526,13 @@ Levels.LevelBase {
   Platform{
       row:122
       column: 3
-      size:3
+      size:6
   }
-  Platform{
-      row:125
-      column: 3
-      size:3
-  }
+//  Platform{
+//      row:125
+//      column: 3
+//      size:3
+//  }
   EnemyMonster{
       row:122
       column: 4
@@ -623,7 +623,7 @@ Levels.LevelBase {
       directionTimer.interval: 7000
   }
   EnemyIceBlock{
-      row:155
+      row:180
       column: 7
       size:1
       directionTimer.interval: 15000
@@ -636,23 +636,23 @@ Levels.LevelBase {
   }
 
   EnemySnail{
-      row:158
+      row:170
       column:7
       size:1
       directionTimer.interval: 36500
   }
-  EnemyPet{
-      row:170
-      column:7
-      size:1
-      directionTimer.interval: 16500
-  }
-  EnemyIceBlock{
-      row:180
-      column:7
-      size:1
-      directionTimer.interval: 5500
-  }
+//  EnemyPet{
+//      row:170
+//      column:7
+//      size:1
+//      directionTimer.interval: 16500
+//  }
+//  EnemyIceBlock{
+//      row:180
+//      column:7
+//      size:1
+//      directionTimer.interval: 5500
+//  }
 
   Repeater{
       model: 10
@@ -746,9 +746,9 @@ Levels.LevelBase {
       size:8
   }
 
-  Ground{
-      row:0
-      column: 0
-      size:1000
-  }
+//  Ground{
+//      row:0
+//      column: 0
+//      size:1000
+//  }
 }

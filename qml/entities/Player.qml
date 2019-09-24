@@ -48,7 +48,7 @@ EntityBase {
     //9 resetSensor
     collidesWith: Box.Category2 | Box.Category3 | Box.Category4 | Box.Category5 |Box.Category6 |Box.Category8 |Box.Category9 |Box.Category10
 //    // apply the horizontal value of the TwoAxisController as force to move the player left and right
-    force: Qt.point(controller.xAxis*20*32,0)
+    force: Qt.point(controller.xAxis*10*32,0)
 
     //collision detection
     fixture.onBeginContact: {
@@ -85,7 +85,7 @@ EntityBase {
     onTriggered: {
       var xAxis = controller.xAxis;
       // if xAxis is 0 (no movement command) we slow the player down until he stops
-      if(xAxis == 0) {
+      if(xAxis === 0) {
         if(Math.abs(player.horizontalVelocity) > 10) player.horizontalVelocity /= 1.5
         else player.horizontalVelocity = 0
       }
@@ -104,7 +104,24 @@ EntityBase {
       playerDie.visible=true
       player.x=15
       player.y=100
+      //After the player dies, the level will be closed
+      gameScene.viewPort.closelevel()
+      gameScene.viewPort.openlevel()
+
+//      reloadlevel.start()
 
   }
+
+//  //Used after the level is closed, fast reloading level,To reach all the monsters, gold coins, etc. back to the original
+//  Timer{
+//      id:reloadlevel
+//      interval:10
+//      repeat: false
+//      running: false
+//      onTriggered: {
+//          gameScene.viewPort.openlevel()
+//      }
+
+//  }
 }
 

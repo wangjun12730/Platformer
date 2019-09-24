@@ -46,7 +46,6 @@ TiledEntityBase {
 
       fixture.onBeginContact: {
           var otherEntity = other.getBody().target
-//          if(otherEntity.entityType === "player") reset()//Reset every time  touch a player
           //collider the bullet , died
           if(otherEntity.entityType==="bullet") {
               gameScene.score+=200
@@ -58,6 +57,7 @@ TiledEntityBase {
 
     }
 
+    //picture
     Tile{
         id : enemy
         property alias enemy : enemy
@@ -65,13 +65,13 @@ TiledEntityBase {
         sprite.mirror: collider.linearVelocity.x > 0 ? true : false
     }
 
-    // this timer hides the opponent a few seconds after its death
-    Timer {
-      id: hideTimer
-      interval: 1000
+//    // this timer hides the opponent a few seconds after its death
+//    Timer {
+//      id: hideTimer
+//      interval: 10
 
-      onTriggered: hidden = true
-    }
+//      onTriggered: hidden = true
+//    }
     //Use the timer loop map to make the monster look like it's moving
     Timer {
       id: switchPictureTimer
@@ -96,9 +96,10 @@ TiledEntityBase {
      }
 
     function die() {
+      directionTimer.stop()
       alive = false
-
-      hideTimer.start()
+      hidden=true
+//      hideTimer.start()
     }
 
 }

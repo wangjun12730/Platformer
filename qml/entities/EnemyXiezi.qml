@@ -17,11 +17,6 @@ EnemyBase{
     collider.onLinearVelocityChanged: {
     }
 
-    // reset the opponent
-    function reset() {
-//        x=startX
-//        y=startY
-        alive=true
-    }
+
 
 }

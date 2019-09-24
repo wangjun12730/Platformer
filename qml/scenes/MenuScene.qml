@@ -41,6 +41,9 @@
    function closemusic(){
        menuBackgroundMusic.stop()
    }
+   function playmusic(){
+       menuBackgroundMusic.play()
+   }
 
    Text{
       id:content

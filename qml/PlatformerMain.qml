@@ -4,6 +4,8 @@
 import Felgo 3.0
 import QtQuick 2.0
 import "scenes"
+import GameHistory 1.0
+import GamePlayer 1.0
 GameWindow {
   id: gameWindow
 
@@ -48,10 +50,16 @@ GameWindow {
    onSelectPressed: gameWindow.state = "score"
    onStartPressed:{
        gameScene.enabled=true
+       gameScene.viewPort.openlevel()
        gameWindow.state = "game"
 //       gameScene.loader = "../levels/Level1.qml"
        menuScene.closemusic()
+
+       gameScene.playmusic()
+       //Enter the game interface and set the visible of the player's death interface to FALSE
+       gameScene.playerDie.visible=false
 //       gameScene.playmusic()
+
    }
 
   }
@@ -59,10 +67,15 @@ GameWindow {
   GameScene {
     id: gameScene
     onBackMainMenu: {
+        menuScene.playmusic()
+        gameScene.closemusic()
         gameWindow.state="menu"
-        enabled:false
+        enabled=false
 
     }
+  }
+  GameHistory{
+      id:model1;
   }
   Scoresranking{
       id:scoresranking

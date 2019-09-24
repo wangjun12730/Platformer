@@ -22,7 +22,9 @@ RESOURCES += #    resources.qrc # uncomment for publishing
 
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    qml/scenes/saveandupdate.cpp \
+    qml/scenes/gameplayer.cpp
 
 android {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
@@ -55,4 +57,8 @@ DISTFILES += \
     qml/entities/Bullet.qml \
     qml/entities/Water.qml \
     qml/entities/Brick.qml
+
+HEADERS += \
+    qml/scenes/saveandupdate.h \
+    qml/scenes/gameplayer.h
 

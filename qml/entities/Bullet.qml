@@ -15,12 +15,16 @@ TiledEntityBase{
         bodyType: Body.Dynamic
         categories: Box.Category10
         collidesWith:Box.Category3
+        active: visible
 //        force: Qt.point(0,200)
         collisionTestingOnlyMode: true
         fixture.onBeginContact: {
-            bullet.visible=false
-            collider.active=false
-            console.log("nihao")
+            var otherEntity = other.getBody().target
+            if(otherEntity.entityType === "enemy"){
+                bullet.visible=false
+                collider.active=false
+                console.log("monster die")
+            }
         }
     }
 //    Timer{
@@ -38,10 +42,12 @@ TiledEntityBase{
         id:animateBX
         target: bullet
         properties: "x"
-        from:x
-        to:player.x+480
-        duration:9000
+        from:bullet.x
+        to:bullet.x+10000;
+        duration:49000
         running: true
     }
+
+
 }
 

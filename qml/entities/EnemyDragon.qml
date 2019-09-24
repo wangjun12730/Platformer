@@ -11,13 +11,8 @@ EnemyBase{
         if(linearVelocity.x === 0)
          dragon.direction = dragon.direction*-1            //1 or -1
         // 确保速度恒定
-       linearVelocity.x = direction * speed    //35
+       linearVelocity.x = direction * speed
     }
-    // reset the opponent
-    function reset() {
-//        x=startX
-//        y=startY
-        alive=true
-    }
+
 
 }

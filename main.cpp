@@ -2,7 +2,8 @@
 #include <FelgoApplication>
 
 #include <QQmlApplicationEngine>
-
+#include <./qml/scenes/gameplayer.h>
+#include<./qml/scenes/saveandupdate.h>
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +16,8 @@ int main(int argc, char *argv[])
   // if you have older projects using Qt App wizards from previous QtCreator versions than 3.1, please change them to QQmlApplicationEngine
   QQmlApplicationEngine engine;
   felgo.initialize(&engine);
-
+  qmlRegisterType<saveAndUpdate>("GameHistory", 1, 0, "GameHistory");
+  qmlRegisterType<gamePlayer>("GamePlayer", 1, 0, "GamePlayer");
   // use this during development
   // for PUBLISHING, use the entry point below
   felgo.setMainQmlFileName(QStringLiteral("qml/PlatformerMain.qml"));

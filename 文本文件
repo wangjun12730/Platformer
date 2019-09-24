@@ -1,0 +1,10 @@
+ 
+  Timer{
+        running: true;
+        interval: 1000;
+        onTriggered: {
+            console.log("button  x",bullet.x);
+        }
+        repeat: true;
+
+    }

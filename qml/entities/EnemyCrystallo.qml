@@ -13,15 +13,8 @@ EnemyBase{
         if(linearVelocity.x === 0)
          crystallo.direction = crystallo.direction*-1            //1 or -1
         // 确保速度恒定
-       linearVelocity.x = direction * speed    //35
+       linearVelocity.x = direction * speed
     }
 
-    function reset() {
-
-//      x=startX
-//      y=startY
-      alive=true
-
-    }
 
 }

@@ -12,20 +12,7 @@ EnemyBase{
         if(linearVelocity.x === 0)
          pet.direction =pet.direction*-1            //1 or -1
         // 确保速度恒定
-       linearVelocity.x = direction * speed    //35
-    }
-    Component.onCompleted: {
-        startX=x
-        startY=y
-    }
-
-
-    // reset the opponent
-    function reset() {
-        x=startX
-        y=startY
-        direction=1
-        alive=true
+       linearVelocity.x = direction * speed
     }
 
 }

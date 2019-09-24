@@ -13,17 +13,6 @@ EnemyBase{
 
     }
 
-    Component.onCompleted: {
-        startX=x
-        startY=y
-    }
 
-
-    // reset the opponent
-    function reset() {
-        x=startX
-        y=startY
-        alive=true
-    }
 
 }

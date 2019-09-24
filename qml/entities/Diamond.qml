@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Felgo 3.0
+import QtGraphicalEffects 1.12
 
 TiledEntityBase{
     id:diamond
@@ -22,8 +23,10 @@ TiledEntityBase{
         active: parent.visible
         fixture.onBeginContact:collected=true
     }
-    // reset diamond
-    function reset() {
-        coin.collected = false
-    }
+
+
+//    // reset diamond
+//    function reset() {
+//        coin.collected = false
+//    }
 }

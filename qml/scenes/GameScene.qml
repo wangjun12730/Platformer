@@ -10,7 +10,6 @@ SceneBase{
   width: 480
   height: 320
   gridSize: 32
-
   property alias finishView: finishView //Used to invoke the game interface
   property int offsetBeforeScrollingStarts: 240
   property int score: 0//record scores
@@ -29,14 +28,14 @@ SceneBase{
 //gameBackGroundMusic
   BackgroundMusic{
       id:gameBackgroundMusic
-      playing: true
+      autoPlay: false
       source: "../../assets/music/game.mp3"
   }
   function closemusic(){
       gameBackgroundMusic.stop()
   }
   function playmusic(){
-
+     gameBackgroundMusic.play()
   }
 
   // the whole screen is filled with an incredibly beautiful blue ...
@@ -110,6 +109,7 @@ SceneBase{
 //    ratio: Qt.point(0.6,0)
 //  }
 
+  property alias viewPort: viewPort
   // this is the moving item containing the level and player
   Item {
     id: viewPort
@@ -138,8 +138,21 @@ SceneBase{
     }
 
     // you could load your levels Dynamically with a Loader component here
-    Level1 {
-      id: level
+//    Level1 {
+//      id: level
+//    }
+
+    Loader{
+        id:level
+//        source: "../levels/Level1.qml"
+    }
+    //used to load levels
+    function openlevel(){
+        level.source="../levels/Level1.qml"
+    }
+    //Used to reload levels
+    function closelevel(){
+        level.source=""
     }
 
 //    property alias loader: loader.source
@@ -356,6 +369,12 @@ SceneBase{
             }
 
       }
+//      //Player's Attack Voice
+//      SoundEffect {
+//           id: clickSound
+//           source: "../../assets/music/jump.mp3"
+//           loops:1
+//         }
 
     //The player fires and puts bullets
       Rectangle{
@@ -369,7 +388,7 @@ SceneBase{
           color: "#e9e9e9"
           Text {
               anchors.centerIn: parent
-              text: qsTr("A")
+              text: qsTr("Space")
           }
           MouseArea{
               id:area
@@ -378,6 +397,7 @@ SceneBase{
 
               onClicked: {
 
+//                  clickSound.play()
                   var newEntityProperties = {
 
 //                                      x:player.x > offsetBeforeScrollingStarts ?player.x/2+32:player.x+32,
@@ -452,6 +472,7 @@ SceneBase{
            spacing: 10
             y:30
            Rectangle{
+               id:continue1
                 x:97;y:20
                 width: 115;height: 30
 //                anchors.horizontalCenter: gameSetting.horizontalCenter
@@ -474,21 +495,45 @@ SceneBase{
                        gameSetting.visible=false
                        setting.opacity=1 //Set the opacity to 1 for setting
                    }
+                   onPressed: continue1.opacity=0.5
+                   onReleased: continue1.opacity=1
                }
 
            }
+
+
            Rectangle{
+               id:bgMusic
                x:97
                width: 115;height: 30
                color:"green"
+               opacity: 1
 //               anchors.horizontalCenter: gameSetting.horizontalCenter
+//               Text {
+//                   id:text1
+//                   anchors.centerIn: parent
+//                   visible: false
+//                   text: gameBackgroundMusic.playing?"on":"off"
+//               }
                Text{
+                   visible: true
                    anchors.centerIn: parent
                    text:"background music"
                    font.family: p22H.name
                    font.pixelSize: 20
                    color: "white"
                }
+               MouseArea{
+                   anchors.fill:parent
+                   onClicked:{
+                       if(gameBackgroundMusic.playing===true)
+                        { closemusic()
+                       }else playmusic()
+                   }
+                   onPressed: bgMusic.opacity=0.5
+                   onReleased: bgMusic.opacity=1
+               }
+
                MultiResolutionImage{
                    source: "../../assets/menu/menulist.png"
                    anchors.fill:parent
@@ -496,6 +541,7 @@ SceneBase{
 
            }
            Rectangle{
+               id:gameMusic
                x:97
                width: 115;height: 30
                color:"green"
@@ -507,12 +553,23 @@ SceneBase{
                    font.pixelSize: 20
                    color: "white"
                }
+               MouseArea{
+                   anchors.fill:parent
+//                   onClicked:{
+//                       if(gameBackgroundMusic.playing===true)
+//                        { closemusic()
+//                       }else playmusic()
+//                   }
+                   onPressed: gameMusic.opacity=0.5
+                   onReleased: gameMusic.opacity=1
+               }
                MultiResolutionImage{
                    source: "../../assets/menu/menulist.png"
                    anchors.fill:parent
                    opacity: 0.5              }
            }
            Rectangle{
+               id:back
                x:97
                width: 115;height: 30
                color:"green"
@@ -535,6 +592,8 @@ SceneBase{
                        backMainMenu()
                        setting.opacity=1 //Set the opacity to 1 for setting
                    }
+                   onPressed: back.opacity=0.5
+                   onReleased: back.opacity=1
                }
            }
        }
@@ -544,7 +603,7 @@ SceneBase{
        id:finishView
        anchors.fill:parent
        opacity: visible? 1:0
-       visible: false
+       visible: true
        enabled: visible
 
        MultiResolutionImage{
@@ -563,6 +622,8 @@ SceneBase{
                     player.x=20
                    player.y=20
                    finishView.visible=false
+                   viewPort.closelevel()
+                   viewPort.openlevel()
                }
            }
            MenuButton{
@@ -572,11 +633,16 @@ SceneBase{
                onClicked:{
                    player.x=20
                    player.y=20
+                   //Record score
+                    model1.append("game"+1,gameScene.score);
                   finishView.visible=false
                    backMainMenu()
+
                }
            }
+
         }
+
 //       Timer{
 //           interval:100
 //           repeat: true
@@ -627,17 +693,33 @@ SceneBase{
                   Rectangle{
                     width: 32
                     height: 32
-                    color:"#e9e9e9"
+                    color:"#5151A2"
                     Text{
+                        anchors.centerIn: parent
                         text:"again"
                     }
+                    MouseArea{
+                        anchors.fill:parent
+                        onClicked:{
+                            playerDie.visible=false
+//                            viewPort.closelevel()
+//                            reloadlevel.start()
+                        }
+
+                    }
+
                   }
                   Rectangle{
                       width: 32
                       height: 32
-                      color: "#e9e9e9"
+                      color: "#5151A2"
                       Text{
+                          anchors.centerIn: parent
                           text:"back"
+                      }
+                      MouseArea{
+                          anchors.fill: parent
+                          onClicked: backMainMenu()
                       }
                   }
        }
@@ -653,10 +735,29 @@ SceneBase{
   Keys.forwardTo: controller
   TwoAxisController {
     id: controller
+    inputActionsToKeyCode: {
+                            "up": Qt.Key_W,
+                           "down": Qt.Key_S,
+                           "left": Qt.Key_A,
+                           "right": Qt.Key_D,
+                           "fire": Qt.Key_Space
+                   }
     onInputActionPressed: {
       console.debug("key pressed actionName " + actionName)
       if(actionName == "up") {
         player.jump()
+      }
+      if(actionName==="fire"){
+          var newEntityProperties = {
+
+//                                      x:player.x > offsetBeforeScrollingStarts ?player.x/2+32:player.x+32,
+                                x:player.x>offsetBeforeScrollingStarts?(offsetBeforeScrollingStarts-player.width/2):player.x,
+                              y:player.y+16,
+                          }
+          console.log(player.x+"")
+           entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("../entities/Bullet.qml"),newEntityProperties)
+          bullet-=1
+
       }
     }
   }
